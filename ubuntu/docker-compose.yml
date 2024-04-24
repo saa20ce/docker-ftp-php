@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  ftp-server:
+    build:
+      context: .
+      dockerfile: Dockerfile-ftp/Dockerfile
+    volumes:
+      - ./Dockerfile-ftp/ftp_users.txt:/etc/vsftpd/virtual_users.txt
+      - ftp_data:/ftproot
+    ports:
+      - "21:21"
+    command: sh -c "/usr/sbin/vsftpd.sh"
+
+  php-container:
+    build:
+      context: .
+      dockerfile: Dockerfile-php/5.6/Dockerfile
+    volumes:
+      - ftp_data:/ftproot
+      - ./projects:/projects
+      - ./template:/template
+    ports:
+      - "80:80"
+    command: /usr/sbin/php-fpm5.6 --nodaemonize
+
+volumes:
+  ftp_data:
