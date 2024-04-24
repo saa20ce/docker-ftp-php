@@ -8,6 +8,10 @@ add_user() {
 
     echo "$username:$password" >> "$USER_FILE"
     echo "User $username added successfully."
+
+    mkdir -p "/ftproot/$username"
+    chown -R ftp:ftp "/ftproot/$username" 
+    echo "Directory /ftproot/$username created successfully and assigned to ftp user."
 }
 
 delete_user() {
