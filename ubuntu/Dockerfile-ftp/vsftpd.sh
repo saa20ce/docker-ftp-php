@@ -16,10 +16,5 @@ create_user_dirs() {
 create_user_dirs
 
 chmod 755 /ftproot
-find /ftproot -mindepth 1 -maxdepth 1 -type d -exec chmod 700 {} \;
-find /ftproot -mindepth 1 -maxdepth 1 -type d -exec chown $(basename {}):{} \;
-
-ls -la /ftproot
-cat /var/log/vsftpd.log
 
 exec /usr/sbin/vsftpd /etc/vsftpd/vsftpd.conf
