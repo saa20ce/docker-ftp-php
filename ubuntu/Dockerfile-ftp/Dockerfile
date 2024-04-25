@@ -7,7 +7,7 @@ RUN apt-get update && \
 COPY Dockerfile-ftp/ftp_users.txt /etc/vsftpd/ftp_users.txt
 COPY Dockerfile-ftp/vsftpd.conf /etc/vsftpd/vsftpd.conf
 COPY Dockerfile-ftp/vsftpd.sh /usr/local/bin/vsftpd.sh
-COPY Dockerfile-ftp/manage-users.sh /usr/local/bin/manage-users.sh
+COPY Dockerfile-ftp/manage-users.sh /manage-users.sh
 
 RUN mkdir -p /var/run/vsftpd/empty && \
     chown root:root /var/run/vsftpd/empty && \

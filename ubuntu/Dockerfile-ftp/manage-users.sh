@@ -1,6 +1,6 @@
 #!/bin/bash
 
-USER_FILE="/etc/vsftpd/virtual_users.txt"
+USER_FILE="/etc/vsftpd/ftp_users.txt"
 
 add_user() {
     local username=$1
@@ -19,6 +19,13 @@ delete_user() {
 
     sed -i "/^$username:/d" "$USER_FILE"
     echo "User $username deleted successfully."
+
+    if [ -d "/ftproot/$username" ]; then
+        rm -rf "/ftproot/$username"
+        echo "Directory /ftproot/$username deleted successfully."
+    else
+        echo "Directory /ftproot/$username not found."
+    fi
 }
 
 
