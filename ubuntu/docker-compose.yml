@@ -21,7 +21,6 @@ services:
       - ./template:/template
     ports:
       - "80:80"
-    command: /usr/sbin/php-fpm5.6 --nodaemonize
 
 volumes:
   ftp_data:
