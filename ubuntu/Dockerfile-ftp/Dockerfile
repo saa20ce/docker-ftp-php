@@ -13,9 +13,10 @@ RUN mkdir -p /var/run/vsftpd/empty && \
     chown root:root /var/run/vsftpd/empty && \
     chmod 755 /var/run/vsftpd/empty && \
     mkdir -p /ftproot && \
-    chmod 755  /ftproot 
-    
+    chmod 755  /ftproot && \
+    chmod 755 /usr/local/bin/vsftpd.sh && \
+    chmod 755 /manage-users.sh
 
 EXPOSE 21
 
-CMD ["vsftpd.sh"]
+CMD ["/usr/local/bin/vsftpd.sh"]
