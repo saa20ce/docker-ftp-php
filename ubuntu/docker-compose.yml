@@ -10,6 +10,7 @@ services:
     ports:
       - "21:21"
       - "40000-40100:40000-40100"
+    restart: unless-stopped
 
   php-container:
     build:
@@ -21,6 +22,4 @@ services:
       - ./template:/template
     ports:
       - "80:80"
-
-volumes:
-  ftp_data:
+    restart: unless-stopped
