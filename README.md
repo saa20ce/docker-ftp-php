@@ -13,6 +13,8 @@ docker compose start
 docker exec ubuntu-ftp-server-1 bash 
 # for go to php container
 docker exec ubuntu-php-container-1 bash 
+# for exit to container
+exit;
 # for stop containers
 docker compose stop 
 ```
