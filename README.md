@@ -11,9 +11,9 @@ On all subsequent launches, you can use
 # for start containers
 docker compose start 
 # for go to ftp container
-docker exec ubuntu-ftp-server-1 bash 
+docker exec -it ubuntu-ftp-server-1 bash 
 # for go to php container
-docker exec ubuntu-php-container-1 bash 
+docker exec -it ubuntu-php-container-1 bash 
 # for exit to container
 exit;
 # for stop containers
