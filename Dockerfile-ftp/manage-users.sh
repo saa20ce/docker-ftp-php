@@ -1,24 +1,36 @@
 #!/bin/bash
 
-USER_FILE="/etc/vsftpd/virtual_users.txt"
+USER_FILE="/etc/vsftpd/ftp_users.txt"
 
 add_user() {
     local username=$1
     local password=$2
 
-    echo "$username:$password" >> "$USER_FILE"
-    echo "User $username added successfully."
+    useradd -m -d "/ftproot/$username" -s /bin/bash -g docker "$username"
+    echo "$username:$password" | chpasswd
 
-    mkdir -p "/ftproot/$username"
-    chown -R ftp:ftp "/ftproot/$username" 
-    echo "Directory /ftproot/$username created successfully and assigned to ftp user."
+    echo "$username:$password" >> "$USER_FILE"
+    echo "FTP user $username added successfully."
+
+    mkdir -p "/ftproot/$username/$username"
+    chown -R "$username:docker" "/ftproot/$username"
+    echo "Created directory /ftproot/$username for user $username"
 }
 
 delete_user() {
     local username=$1
 
+    userdel $username
+
     sed -i "/^$username:/d" "$USER_FILE"
     echo "User $username deleted successfully."
+
+    if [ -d "/ftproot/$username" ]; then
+        rm -rf "/ftproot/$username"
+        echo "Directory /ftproot/$username deleted successfully."
+    else
+        echo "Directory /ftproot/$username not found."
+    fi
 }
 
 
