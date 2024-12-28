@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 services:
   ftp-server:
@@ -7,9 +7,7 @@ services:
       dockerfile: Dockerfile-ftp/Dockerfile
     volumes:
       - ./ftproot:/ftproot
-    ports:
-      - "21:21"
-      - "40000-40100:40000-40100"
+    network_mode: "host"
     restart: unless-stopped
 
   php-container:
